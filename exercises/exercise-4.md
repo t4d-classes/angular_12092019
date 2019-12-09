@@ -10,4 +10,19 @@
 
 5. On each car row, add a button labeled with "Delete". When the delete button is clicked removed the car from the array of cars.
 
+```html
+<button type="button" ng-click="deleteCar(car.id)">Delete</button>
+```
+
+To perform a delete:
+
+```javascript
+const carIndex = $scope.cars.findIndex(c => c.id === carId);
+$scope.cars.splice(carIndex, 1);
+
+// or
+
+$scope.cars = $scope.cars.filter(c => c.id !== carId);
+```
+
 6. Run the application and verify it works. Be sure to check your terminal window and browser console for errors.
