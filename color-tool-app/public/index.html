@@ -4,15 +4,16 @@
 
   <head>
     <title>Color Tool App</title>
-  </head>
-
-  <body>
-    <div ng-app="ColorToolApp"
-      ng-controller="ColorToolController as vm">
+    <!-- <script id="/tool-header.html" type="text/ng-template">
 
       <header>
         <h1>{{vm.headerText}}</h1>
       </header>
+  
+    </script>
+    <script id="/color-tool.html" type="text/ng-template">
+
+      <tool-header header-text="Color Tool!!"></tool-header>
 
       <ul>
         <li ng-repeat="color in vm.colors">{{color}}</li>
@@ -22,12 +23,21 @@
 
         <div>
           <label for="color-input">Color:</label>
-          <input type="text" id="color-input" name="color" ng-model="vm.colorForm.color" />
+          <input type="text" id="color-input" name="color"
+            ng-model="vm.colorForm.color" />
         </div>
 
         <button type="button" ng-click="vm.addColor()">Add Color</button>
 
-      </form>
+      </form>      
+  
+    </script> -->
+  </head>
+
+  <body>
+
+    <div ng-app="ColorToolApp">
+      <color-tool></color-tool>
     </div>
 
     <script src="../src/index.js"></script>
