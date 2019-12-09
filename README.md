@@ -25,7 +25,7 @@ Breaks:
 - Day 1: AngularJS for Angular Developers
 - Day 2: Converting from AngularJS to Angular
 - Day 3: AngularJS and Angular Topics Continued
-- Day 4: Upgrade Topics, Unit Testing, Other Topics
+- Day 4: Angular 7 to 9 Upgrade Topics, Angular Unit Testing, Other Angular Topics
 
 ## Requirements
 
