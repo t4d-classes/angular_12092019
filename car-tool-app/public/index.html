@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>Color Tool App</title>
+  </head>
+
+  <body>
+    <div ng-app="ColorToolApp"
+      ng-controller="ColorToolController">
+
+      <header>
+        <h1>{{headerText}}</h1>
+      </header>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Color</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="car in cars" >
+            <td>{{car.id}}</td>
+            <td>{{car.make}}</td>
+            <td>{{car.model}}</td>
+            <td>{{car.year}}</td>
+            <td>{{car.color}}</td>
+            <td>{{car.price}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <script src="../src/index.js"></script>
+  </body>
+
+
+</html>

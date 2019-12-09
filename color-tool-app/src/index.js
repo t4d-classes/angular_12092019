@@ -6,5 +6,11 @@ angular.module('ColorToolApp', [])
 
       $scope.headerText = 'Color Tool!';
 
+      $scope.colors = [
+        'red',
+        'green',
+        'blue',
+      ];
+
     });
 
