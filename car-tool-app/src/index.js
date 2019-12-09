@@ -1,10 +1,10 @@
 require('angular');
 
-angular.module('ColorToolApp', [])
-  .controller('ColorToolController',
+angular.module('CarToolApp', [])
+  .controller('CarToolController',
     function($scope) {
 
-      $scope.headerText = 'Color Tool!';
+      $scope.headerText = 'Car Tool!';
 
       $scope.cars = [
         { id: 1, make: 'Ford', model: 'Fusion Hybrid', year: 2018, color: 'white', price: 45000 },
