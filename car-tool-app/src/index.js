@@ -11,7 +11,7 @@ angular.module('CarToolApp', [])
         { id: 2, make: 'Tesla', model: 'S', year: 2019, color: 'blue', price: 100000 },
       ];
 
-      $scope.editCarId = 2;
+      $scope.editCarId = -1;
 
       $scope.carForm = {
         make: '',
@@ -36,10 +36,36 @@ angular.module('CarToolApp', [])
 
       };
 
+      $scope.editCar = function(carId) {
+
+        const carIndex = $scope.cars.findIndex(c => c.id === carId);
+
+        $scope.editCarForm = {
+          ...$scope.cars[carIndex],
+        };
+
+        $scope.editCarId = carId;
+      }
+
       $scope.deleteCar = function(carId) {
-
         $scope.cars = $scope.cars.filter(c => c.id !== carId);
+      };
 
+      $scope.saveCar = function(carId, editCarForm) {
+        const car = {
+          ...editCarForm,
+          id: carId,
+        };
+
+        const carIndex = $scope.cars.findIndex(c => c.id === carId);
+
+        $scope.cars = $scope.cars.concat();
+        $scope.cars[carIndex] = car;
+        $scope.editCarId = -1;
+      };
+
+      $scope.cancelCar = function() {
+        $scope.editCarId = -1;
       };
 
     });

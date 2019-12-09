@@ -35,6 +35,9 @@
             <td>{{car.color}}</td>
             <td>{{car.price}}</td>
             <td>
+              <button type="button" ng-click="editCar(car.id)">
+                Edit
+              </button>
               <button type="button" ng-click="deleteCar(car.id)">
                 Delete
               </button>
@@ -43,6 +46,18 @@
           <tr ng-repeat-end ng-if="car.id === editCarId">
             <td>{{car.id}}</td>
             <td><input type="text" ng-model="editCarForm.make"></td>
+            <td><input type="text" ng-model="editCarForm.model"></td>
+            <td><input type="number" ng-model="editCarForm.year"></td>
+            <td><input type="text" ng-model="editCarForm.color"></td>
+            <td><input type="number" ng-model="editCarForm.price"></td>
+            <td>
+              <button type="button" ng-click="saveCar(car.id, editCarForm)">
+                Save
+              </button>
+              <button type="button" ng-click="cancelCar()">
+                Cancel
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>

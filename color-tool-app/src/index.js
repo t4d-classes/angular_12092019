@@ -1,30 +1,35 @@
 require('angular');
 
+// class P { }
+// typeof P => function
+
 angular.module('ColorToolApp', [])
   .controller('ColorToolController',
-    function($scope, $timeout) {
+    class ColorToolController {
 
-      $timeout(() => {
-        $scope.colors.push('purple');
-        console.log($scope.colors);
-      }, 5000);
+      constructor() {
 
-      $scope.headerText = 'Color Tool!';
+        const vm = this;
 
-      $scope.colors = [
-        'red',
-        'green',
-        'blue',
-      ];
+        vm.headerText = 'Color Tool!';
+  
+        vm.colors = [
+          'red',
+          'green',
+          'blue',
+        ];
+  
+        vm.colorForm = {
+          color: '',
+        };
+  
+        vm.addColor = function() {
+          vm.colors.push(vm.colorForm.color);
+          vm.colorForm.color = '';
+        };
 
-      $scope.colorForm = {
-        color: '',
-      };
+      }
 
-      $scope.addColor = function() {
-        $scope.colors.push($scope.colorForm.color);
-        $scope.colorForm.color = '';
-      };
 
     });
 
