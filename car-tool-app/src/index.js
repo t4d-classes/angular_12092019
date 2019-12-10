@@ -1,11 +1,40 @@
 require('angular');
 
+import viewCarRowTpl from './templates/car-view-row.html';
 import toolHeaderTpl from './templates/tool-header.html';
 import carTableTpl from './templates/car-table.html';
 import carFormTpl from './templates/car-form.html';
 import carToolTpl from './templates/car-tool.html';
 
 angular.module('CarToolApp', [])
+  .directive('carViewRow', function() {
+
+    return {
+      restrict: 'C',
+      template: viewCarRowTpl,
+      scope: {
+        car: '=',
+        onEditCar: '&',
+        onDelete: '&',
+      },
+      bindToController: true,
+      controllerAs: '$ctrl',
+      controller: function CarViewRowController() {
+
+        const $ctrl = this;
+
+        $ctrl.editCar = function(carId) {
+          $ctrl.onEditCar({ carId });
+        };
+
+        $ctrl.deleteCar = function(carId) {
+          $ctrl.onDeleteCar({ carId });
+        };
+
+      },
+    }
+
+  })
   .directive('toolHeader', function() {
 
     return {
@@ -25,54 +54,45 @@ angular.module('CarToolApp', [])
     };
 
   })
-  .directive('carTable', function() {
-
-    return {
-      restrict: 'E',
-      template: carTableTpl,
-      scope: {
-        // this is ok for AngularJS < 1.5, but in general
-        // this is evil
-        cars: '=', // two-way data binding
-        editCarId: '=',
-        onEditCar: '&',
-        onDeleteCar: '&',
-        onSaveCar: '&',
-        onCancelCar: '&',
-      },
-      bindToController: true,
-      controllerAs: 'vm',
-      controller: function() {
-        const vm = this;
-        vm.editCarId = -1;
-        vm.editCar = function EditCar(carId) {
-          vm.onEditCar({ carId: carId });
-          const carIndex = vm.cars
-            .findIndex(c => c.id === carId);
-          vm.editCarForm = {
-            ...vm.cars[carIndex],
-          };
+  .component('carTable', {
+    template: carTableTpl,
+    bindings: {
+      cars: '<',
+      editCarId: '<',
+      onEditCar: '&',
+      onDeleteCar: '&',
+      onSaveCar: '&',
+      onCancelCar: '&',
+    },
+    controller: function CarTableController() {
+      const $ctrl = this;
+      $ctrl.editCarId = -1;
+      $ctrl.editCar = function EditCar(carId) {
+        $ctrl.onEditCar({ carId: carId });
+        const carIndex = $ctrl.cars
+          .findIndex(c => c.id === carId);
+        $ctrl.editCarForm = {
+          ...$ctrl.cars[carIndex],
         };
-        vm.deleteCar = function DeleteCar(carId) {
-          vm.onDeleteCar({ carId: carId });
-        };
+      };
+      $ctrl.deleteCar = function DeleteCar(carId) {
+        $ctrl.onDeleteCar({ carId: carId });
+      };
 
-        vm.saveCar = function SaveCar(carId, editCarForm) {
-          vm.onSaveCar({
-            car: {
-              ...editCarForm,
-              id: carId,
-            },
-          });
-        };
+      $ctrl.saveCar = function SaveCar(carId, editCarForm) {
+        $ctrl.onSaveCar({
+          car: {
+            ...editCarForm,
+            id: carId,
+          },
+        });
+      };
 
-        vm.cancelCar = function CancelCar() {
-          vm.onCancelCar();
-        };
+      $ctrl.cancelCar = function CancelCar() {
+        $ctrl.onCancelCar();
+      };
 
-      },
-    };
-
+    },
   })
   .directive('carForm', function() {
 

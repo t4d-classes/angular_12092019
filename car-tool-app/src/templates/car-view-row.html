@@ -1,0 +1,16 @@
+<td>{{$ctrl.car.id}}</td>
+<td>{{$ctrl.car.make}}</td>
+<td>{{$ctrl.car.model}}</td>
+<td>{{$ctrl.car.year}}</td>
+<td>{{$ctrl.car.color}}</td>
+<td>{{$ctrl.car.price}}</td>
+<td>
+  <button type="button"
+    ng-click="$ctrl.editCar($ctrl.car.id)">
+    Edit
+  </button>
+  <button type="button"
+    ng-click="$ctrl.deleteCar($ctrl.car.id)">
+    Delete
+  </button>
+</td>
