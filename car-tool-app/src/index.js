@@ -1,6 +1,7 @@
 require('angular');
 
 import viewCarRowTpl from './templates/car-view-row.html';
+import editCarRowTpl from './templates/car-edit-row.html';
 import toolHeaderTpl from './templates/tool-header.html';
 import carTableTpl from './templates/car-table.html';
 import carFormTpl from './templates/car-form.html';
@@ -15,7 +16,7 @@ angular.module('CarToolApp', [])
       scope: {
         car: '=',
         onEditCar: '&',
-        onDelete: '&',
+        onDeleteCar: '&',
       },
       bindToController: true,
       controllerAs: '$ctrl',
@@ -32,7 +33,84 @@ angular.module('CarToolApp', [])
         };
 
       },
-    }
+    };
+
+  })
+  .directive('carEditRow', function() {
+
+    return {
+      restrict: 'C',
+      template: editCarRowTpl,
+      scope: {
+        car: '=',
+        onSaveCar: '&',
+        onCancelCar: '&',
+      },
+      bindToController: true,
+      controllerAs: '$ctrl',
+      controller: function CarEditRowController() {
+
+        const $ctrl = this;
+
+        // from the component API...
+        // $ctrl.$onInit = function CarEditRowInit() {
+        //   $ctrl.editCarForm = {
+        //     ...$ctrl.car,
+        //   };          
+        // };
+
+        $ctrl.saveCar = function SaveCar() {
+          $ctrl.onSaveCar({
+            ...$ctrl.editCarForm,
+            id: $ctrl.car.id,
+          });
+        };
+
+        $ctrl.cancelCar = function CancelCar(carId) {
+          $ctrl.onCancelCar();
+        };
+
+      },
+      // link: function(scope) {
+
+      //   scope.$ctrl.editCarForm = {
+      //     ...scope.$ctrl.car,
+      //   };          
+      // },
+      // link: {
+      //   pre: function(scope) {
+      //     console.log('pre-link');
+      //     console.log(scope.$ctrl.car.id);
+
+      //     scope.$ctrl.editCarForm = {
+      //       ...scope.$ctrl.car,
+      //     };            
+      //   },
+      //   post: function(scope) {
+      //     console.log('post-link');
+      //     console.log(scope);
+      //   }
+      // },
+      compile: function() {
+        return {
+          pre: function(scope) {
+            console.log('pre-link');
+            console.log(scope.$ctrl.car.id);
+
+            scope.$ctrl.editCarForm = {
+              ...scope.$ctrl.car,
+            };            
+          },
+          post: function(scope) {
+            console.log('post-link');
+            console.log(scope);
+          }
+        };
+      },
+    };
+
+    // compile, controller, prelink, postlink
+
 
   })
   .directive('toolHeader', function() {
@@ -79,13 +157,8 @@ angular.module('CarToolApp', [])
         $ctrl.onDeleteCar({ carId: carId });
       };
 
-      $ctrl.saveCar = function SaveCar(carId, editCarForm) {
-        $ctrl.onSaveCar({
-          car: {
-            ...editCarForm,
-            id: carId,
-          },
-        });
+      $ctrl.saveCar = function SaveCar(car) {
+        $ctrl.onSaveCar({ car });
       };
 
       $ctrl.cancelCar = function CancelCar() {

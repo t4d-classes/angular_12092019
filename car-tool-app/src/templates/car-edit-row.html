@@ -1,0 +1,14 @@
+<td>{{$ctrl.car.id}}</td>
+<td><input type="text" ng-model="$ctrl.editCarForm.make"></td>
+<td><input type="text" ng-model="$ctrl.editCarForm.model"></td>
+<td><input type="number" ng-model="$ctrl.editCarForm.year"></td>
+<td><input type="text" ng-model="$ctrl.editCarForm.color"></td>
+<td><input type="number" ng-model="$ctrl.editCarForm.price"></td>
+<td>
+  <button type="button" ng-click="$ctrl.saveCar()">
+    Save
+  </button>
+  <button type="button" ng-click="$ctrl.cancelCar()">
+    Cancel
+  </button>
+</td>
