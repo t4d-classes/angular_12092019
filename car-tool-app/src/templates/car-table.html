@@ -1,0 +1,47 @@
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Make</th>
+      <th>Model</th>
+      <th>Year</th>
+      <th>Color</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat-start="car in vm.cars" ng-if="car.id !== vm.editCarId">
+      <td>{{car.id}}</td>
+      <td>{{car.make}}</td>
+      <td>{{car.model}}</td>
+      <td>{{car.year}}</td>
+      <td>{{car.color}}</td>
+      <td>{{car.price}}</td>
+      <td>
+        <button type="button" ng-click="vm.editCar(car.id)">
+          Edit
+        </button>
+        <button type="button" ng-click="vm.deleteCar(car.id)">
+          Delete
+        </button>
+      </td>
+    </tr>
+    <tr ng-repeat-end ng-if="car.id === vm.editCarId">
+      <td>{{car.id}}</td>
+      <td><input type="text" ng-model="vm.editCarForm.make"></td>
+      <td><input type="text" ng-model="vm.editCarForm.model"></td>
+      <td><input type="number" ng-model="vm.editCarForm.year"></td>
+      <td><input type="text" ng-model="vm.editCarForm.color"></td>
+      <td><input type="number" ng-model="vm.editCarForm.price"></td>
+      <td>
+        <button type="button" ng-click="vm.saveCar(car.id, editCarForm)">
+          Save
+        </button>
+        <button type="button" ng-click="vm.cancelCar()">
+          Cancel
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
