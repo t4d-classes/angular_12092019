@@ -4,20 +4,11 @@ import toolHeaderTpl from './templates/tool-header.html';
 import colorToolTpl from './templates/color-tool.html';
 
 angular.module('ColorToolApp', [])
-  .directive('toolHeader', function() {
-
-    return {
-      restrict: 'E', // selector: 'tool-header',
-      template: toolHeaderTpl,
-      controllerAs: 'vm', // sets the vm in the template
-      bindToController: true,
-      scope: {
-        headerText: '@',
-      },
-      controller: function() {
-      },
-    };
-
+  .component('toolHeader', {
+    template: toolHeaderTpl,
+    bindings: {
+      headerText: '@',
+    },
   })
   .directive('colorTool', function() {
     return {
