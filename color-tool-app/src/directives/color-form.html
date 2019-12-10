@@ -1,0 +1,12 @@
+<form novalidate>
+
+  <div>
+    <label for="color-input">Color:</label>
+    <input type="text" id="color-input"
+      name="color" ng-model="vm.colorForm.color" />
+  </div>
+  
+  <button type="button"
+    ng-click="vm.submitColor()">{{vm.buttonText}}</button>
+
+</form>

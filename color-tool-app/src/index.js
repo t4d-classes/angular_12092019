@@ -37,15 +37,13 @@ angular.module('ColorToolApp', [])
           'blue',
         ];
   
-        vm.colorForm = {
-          color: '',
-        };
-  
-        vm.addColor = function() {
-          vm.colors.push(vm.colorForm.color);
-          vm.colorForm.color = '';
+        vm.addColor = function(colorData) {
+          vm.colors.push(colorData.color);
         };
 
       },
     };
   });
+
+require('./directives/text-list');
+require('./directives/color-form');

@@ -14,6 +14,11 @@ angular.module('CarToolApp', [])
         headerText: '@',
       },
       bindToController: true,
+      // bindToController does this
+      // controller: function($scope) {
+      //   const vm = this;
+      //   vm.headerText = $scope.headerText;
+      // },
       controllerAs: 'vm',
       controller: function() { },
     };
@@ -25,6 +30,8 @@ angular.module('CarToolApp', [])
       restrict: 'E',
       template: carTableTpl,
       scope: {
+        // this is ok for AngularJS < 1.5, but in general
+        // this is evil
         cars: '=',
         editCarId: '=',
       },
