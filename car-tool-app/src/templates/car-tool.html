@@ -1,6 +1,9 @@
 <tool-header header-text="Car Tool"></tool-header>
 
-<car-table cars="vm.cars" edit-car-id="vm.editCarId"></car-table>
+<car-table cars="vm.cars" edit-car-id="vm.editCarId"
+  on-delete-car="vm.deleteCar(carId)"
+  on-edit-car="vm.editCar(carId)"
+></car-table>
 
 <form novalidate>
 
@@ -25,6 +28,6 @@
     <input type="number" id="price-input" name="price" ng-model="vm.carForm.price" />
   </div>
               
-  <button type="button" ng-click="vm.addCar(carForm)">Add Car</button>
+  <button type="button" ng-click="vm.addCar(vm.carForm)">Add Car</button>
 
 </form>

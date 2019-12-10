@@ -32,12 +32,38 @@ angular.module('CarToolApp', [])
       scope: {
         // this is ok for AngularJS < 1.5, but in general
         // this is evil
-        cars: '=',
+        cars: '=', // two-way data binding
         editCarId: '=',
+        onEditCar: '&',
+        onDeleteCar: '&',
       },
       bindToController: true,
       controllerAs: 'vm',
-      controller: function() { },
+      controller: function() {
+
+        const vm = this;
+
+        vm.editCarId = -1;
+
+        vm.editCar = function(carId) {
+          
+          vm.onEditCar({ carId: carId });
+
+          const carIndex = vm.cars
+            .findIndex(c => c.id === carId);
+
+          vm.editCarForm = {
+            ...vm.cars[carIndex],
+          };
+
+          // vm.editCarId = carId;
+        };
+
+        vm.deleteCar = function(carId) {
+          vm.onDeleteCar({ carId: carId });
+        };
+
+      },
     };
 
   })
@@ -58,7 +84,6 @@ angular.module('CarToolApp', [])
           { id: 2, make: 'Tesla', model: 'S', year: 2019, color: 'blue', price: 100000 },
         ];
   
-        vm.editCarId = -1;
   
         vm.carForm = {
           make: '',
@@ -81,11 +106,13 @@ angular.module('CarToolApp', [])
   
         vm.editCar = function(carId) {
   
-          const carIndex = vm.cars.findIndex(c => c.id === carId);
+          // const carIndex = vm.cars.findIndex(c => c.id === carId);
   
-          vm.editCarForm = {
-            ...vm.cars[carIndex],
-          };
+          // vm.editCarForm = {
+          //   ...vm.cars[carIndex],
+          // };
+
+          // console.dir(vm.editCarForm);
   
           vm.editCarId = carId;
         }
