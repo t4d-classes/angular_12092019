@@ -1,33 +1,17 @@
-<tool-header header-text="Car Tool"></tool-header>
+<tool-header
+  header-text="Car Tool">
+</tool-header>
 
-<car-table cars="vm.cars" edit-car-id="vm.editCarId"
+<car-table
+  cars="vm.cars"
+  edit-car-id="vm.editCarId"
   on-delete-car="vm.deleteCar(carId)"
   on-edit-car="vm.editCar(carId)"
+  on-save-car="vm.saveCar(car)"
+  on-cancel-car="vm.cancelCar()"
 ></car-table>
 
-<form novalidate>
-
-  <div>
-    <label for="make-input">Make:</label>
-    <input type="text" id="make-input" name="make" ng-model="vm.carForm.make" />
-  </div>
-  <div>
-    <label for="model-input">Model:</label>
-    <input type="text" id="model-input" name="model" ng-model="vm.carForm.model" />
-  </div>
-  <div>
-    <label for="year-input">Year:</label>
-    <input type="number" id="year-input" name="year" ng-model="vm.carForm.year" />
-  </div>
-  <div>
-    <label for="color-input">Color:</label>
-    <input type="text" id="color-input" name="color" ng-model="vm.carForm.color" />
-  </div>
-  <div>
-    <label for="price-input">Price:</label>
-    <input type="number" id="price-input" name="price" ng-model="vm.carForm.price" />
-  </div>
-              
-  <button type="button" ng-click="vm.addCar(vm.carForm)">Add Car</button>
-
-</form>
+<car-form
+  button-text="Add Car"
+  on-submit-car="vm.addCar(car)">
+</car-form>

@@ -2,6 +2,7 @@ require('angular');
 
 import toolHeaderTpl from './templates/tool-header.html';
 import carTableTpl from './templates/car-table.html';
+import carFormTpl from './templates/car-form.html';
 import carToolTpl from './templates/car-tool.html';
 
 angular.module('CarToolApp', [])
@@ -36,6 +37,51 @@ angular.module('CarToolApp', [])
         editCarId: '=',
         onEditCar: '&',
         onDeleteCar: '&',
+        onSaveCar: '&',
+        onCancelCar: '&',
+      },
+      bindToController: true,
+      controllerAs: 'vm',
+      controller: function() {
+        const vm = this;
+        vm.editCarId = -1;
+        vm.editCar = function EditCar(carId) {
+          vm.onEditCar({ carId: carId });
+          const carIndex = vm.cars
+            .findIndex(c => c.id === carId);
+          vm.editCarForm = {
+            ...vm.cars[carIndex],
+          };
+        };
+        vm.deleteCar = function DeleteCar(carId) {
+          vm.onDeleteCar({ carId: carId });
+        };
+
+        vm.saveCar = function SaveCar(carId, editCarForm) {
+          vm.onSaveCar({
+            car: {
+              ...editCarForm,
+              id: carId,
+            },
+          });
+        };
+
+        vm.cancelCar = function CancelCar() {
+          vm.onCancelCar();
+        };
+
+      },
+    };
+
+  })
+  .directive('carForm', function() {
+
+    return {
+      restrict: 'E',
+      template: carFormTpl,
+      scope: {
+        buttonText: '@',
+        onSubmitCar: '&',
       },
       bindToController: true,
       controllerAs: 'vm',
@@ -43,24 +89,26 @@ angular.module('CarToolApp', [])
 
         const vm = this;
 
-        vm.editCarId = -1;
-
-        vm.editCar = function(carId) {
-          
-          vm.onEditCar({ carId: carId });
-
-          const carIndex = vm.cars
-            .findIndex(c => c.id === carId);
-
-          vm.editCarForm = {
-            ...vm.cars[carIndex],
-          };
-
-          // vm.editCarId = carId;
+        vm.carForm = {
+          make: '',
+          model: '',
+          year: 1900,
+          color: '',
+          price: 0,
         };
 
-        vm.deleteCar = function(carId) {
-          vm.onDeleteCar({ carId: carId });
+        vm.submitCar = function SubmitCar() {
+          vm.onSubmitCar({ car: {
+            ...vm.carForm,
+          } });
+
+          vm.carForm = {
+            make: '',
+            model: '',
+            year: 1900,
+            color: '',
+            price: 0,
+          };
         };
 
       },
@@ -93,27 +141,16 @@ angular.module('CarToolApp', [])
           price: 0,
         };
   
-        vm.addCar = function(carForm) {
+        vm.addCar = function(car) {
   
-          const car = {
-            ...carForm,
+          vm.cars = vm.cars.concat({
+            ...car,
             id: Math.max(...vm.cars.map(c => c.id), 0) + 1,
-          };
-  
-          vm.cars = vm.cars.concat(car);
+          });
   
         };
   
         vm.editCar = function(carId) {
-  
-          // const carIndex = vm.cars.findIndex(c => c.id === carId);
-  
-          // vm.editCarForm = {
-          //   ...vm.cars[carIndex],
-          // };
-
-          // console.dir(vm.editCarForm);
-  
           vm.editCarId = carId;
         }
   
@@ -121,13 +158,10 @@ angular.module('CarToolApp', [])
           vm.cars = vm.cars.filter(c => c.id !== carId);
         };
   
-        vm.saveCar = function(carId, editCarForm) {
-          const car = {
-            ...editCarForm,
-            id: carId,
-          };
+        vm.saveCar = function(car) {
   
-          const carIndex = vm.cars.findIndex(c => c.id === carId);
+          const carIndex = vm.cars
+            .findIndex(c => c.id === car.id);
   
           vm.cars = vm.cars.concat();
           vm.cars[carIndex] = car;
