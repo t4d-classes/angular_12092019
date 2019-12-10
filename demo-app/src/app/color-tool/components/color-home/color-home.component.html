@@ -1,0 +1,27 @@
+<header>
+  <h1>{{headerText}}</h1>
+</header>
+
+<ul>
+  <li *ngFor="let color of colors">
+    {{color}}
+  </li>
+  <!-- <ng-template ngFor [ngForOf]="colors" let-color>
+    <li>{{color}}</li>
+  </ng-template> -->
+</ul>
+
+<form [formGroup]="colorForm">
+
+  <div>
+    <label for="color-input">Color</label>
+    <input type="text" id="color-input" name="color"
+      formControlName="color">
+  </div>
+
+  <button type="button" (click)="addColor()">Add Color</button>
+
+</form>
+
+
+
