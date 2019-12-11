@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>Widget Tool App</title>
+  </head>
+
+  <body>
+
+    <div ng-app="WidgetToolApp" ng-controller="WidgetToolController">
+
+      <tool-header header-text="Widget Tool"></tool-header>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Color</th>
+            <th>Size</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat-start="widget in widgets" ng-if="widget.id === editWidgetId">
+            <td>{{widget.id}}</td>
+            <td><input type="text" id="edit-name-input" name="name" ng-model="editWidgetForm.name"></td>
+            <td><input type="text" id="edit-description-input" name="description" ng-model="editWidgetForm.description"></td>
+            <td><input type="text" id="edit-color-input" name="color" ng-model="editWidgetForm.color"></td>
+            <td><input type="text" id="edit-size-input" name="size" ng-model="editWidgetForm.size"></td>
+            <td><input type="number" id="edit-quantity-input" name="quantity" ng-model="editWidgetForm.quantity"></td>
+            <td>
+              <button type="button" ng-click="saveWidget(widget.id)">Save</button>
+              <button type="button" ng-click="cancelWidget()">Cancel</button>
+            </td>
+          </tr>
+          <tr ng-repeat-end ng-if="widget.id !== editWidgetId">
+              <td>{{widget.id}}</td>
+              <td>{{widget.name}}</td>
+              <td>{{widget.description}}</td>
+              <td>{{widget.color}}</td>
+              <td>{{widget.size}}</td>
+              <td>{{widget.quantity}}</td>
+              <td>
+                <button type="button" ng-click="editWidget(widget.id)">Edit</button>
+                <button type="button" ng-click="deleteWidget(widget.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+      </table>
+
+      <widget-form button-text="Add Widget" on-submit-widget="addWidget(widget)"></widget-form>
+      
+    </div>
+
+    <script src="../src/index.js"></script>
+
+  </body>
+
+
+</html>
