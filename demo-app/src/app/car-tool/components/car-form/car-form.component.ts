@@ -35,7 +35,7 @@ export class CarFormComponent implements OnInit {
   submitCar() {
 
     // outside of car-form template
-    this.submitCarForm.emit(this.carForm.value);
+    this.submitCarForm.emit({ ...this.carForm.value, model: 0 });
 
     this.carForm.reset();
 

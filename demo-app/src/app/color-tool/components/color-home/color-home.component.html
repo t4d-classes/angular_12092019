@@ -19,11 +19,19 @@
 </app-tool-header>
 
 <ul>
-  <li *ngFor="let color of colors">
-    {{color}}
-  </li>
+  <ng-container *ngFor="let color of colors">
+    <li> <!-- ng-repeat-start -->
+      {{color}}
+    </li>
+    <li> <!-- ng-repeat-end -->
+      {{color.toUpperCase()}}
+    </li>
+  </ng-container>
   <!-- <ng-template ngFor [ngForOf]="colors" let-color>
     <li>{{color}}</li>
+    <li>
+      {{color.toUpperCase()}}
+    </li>
   </ng-template> -->
 </ul>
 
