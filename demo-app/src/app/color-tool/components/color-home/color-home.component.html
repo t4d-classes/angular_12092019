@@ -27,17 +27,11 @@
   </ng-template> -->
 </ul>
 
-<form [formGroup]="colorForm">
+<app-color-form buttonText="Add Color"
+  (submitColorForm)="addColor($event)">
+</app-color-form>
 
-  <div>
-    <label for="color-input">Color</label>
-    <input type="text" id="color-input" name="color"
-      formControlName="color">
-  </div>
 
-  <button type="button" (click)="addColor()">Add Color</button>
-
-</form>
 
 
 

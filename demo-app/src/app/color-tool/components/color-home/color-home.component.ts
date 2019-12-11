@@ -1,34 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-color-home',
   templateUrl: './color-home.component.html',
   styleUrls: ['./color-home.component.css']
 })
-export class ColorHomeComponent implements OnInit {
+export class ColorHomeComponent {
 
   colorToolHeaderText = 'Color Tool!!!';
 
   colors = [ 'red', 'green', 'blue' ];
 
-  colorForm: FormGroup;
-
-  constructor(private fb: FormBuilder) { }
-
-  ngOnInit() {
-
-    this.colorForm = this.fb.group({
-      color: '',
-    });
-
-  }
-
-  addColor() {
-
+  addColor(newColor: string) {
     this.colors = this.colors
-      .concat(this.colorForm.value.color);
-
+      .concat(newColor);
   }
-
 }
