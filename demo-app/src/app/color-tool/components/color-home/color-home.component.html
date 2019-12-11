@@ -1,6 +1,22 @@
-<header>
-  <h1>{{headerText}}</h1>
-</header>
+<!--
+
+  scope: { headerText: '@' }
+  headerText="Color Tool"
+
+  scope: { headerText: '@' }
+  headerText="{{colorToolHeaderText}}"
+
+
+  scope: { headerText: '<' }
+  [headerText]="colorToolHeaderText"
+
+  scope: { headerText: '=' }
+  [headerText]="colorToolHeaderText"
+
+-->
+
+<app-tool-header [headerText]="colorToolHeaderText">
+</app-tool-header>
 
 <ul>
   <li *ngFor="let color of colors">
