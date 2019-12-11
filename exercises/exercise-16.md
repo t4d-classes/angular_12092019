@@ -12,3 +12,5 @@
 3. Use a new module for all of the widget tool parts which will be added. Use a new shared module for the tool header component.
 
 4. Run the application and verify it works. Be sure to check your terminal window and browser console for errors.
+
+5. Bonus: Solve world peace.

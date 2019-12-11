@@ -52,12 +52,11 @@ angular.module('CarToolApp', [])
 
         const $ctrl = this;
 
-        // from the component API...
-        // $ctrl.$onInit = function CarEditRowInit() {
-        //   $ctrl.editCarForm = {
-        //     ...$ctrl.car,
-        //   };          
-        // };
+        $ctrl.$onInit = function CarEditRowInit() {
+          $ctrl.editCarForm = {
+            ...$ctrl.car,
+          };          
+        };
 
         $ctrl.saveCar = function SaveCar() {
           $ctrl.onSaveCar({
@@ -71,46 +70,7 @@ angular.module('CarToolApp', [])
         };
 
       },
-      // link: function(scope) {
-
-      //   scope.$ctrl.editCarForm = {
-      //     ...scope.$ctrl.car,
-      //   };          
-      // },
-      // link: {
-      //   pre: function(scope) {
-      //     console.log('pre-link');
-      //     console.log(scope.$ctrl.car.id);
-
-      //     scope.$ctrl.editCarForm = {
-      //       ...scope.$ctrl.car,
-      //     };            
-      //   },
-      //   post: function(scope) {
-      //     console.log('post-link');
-      //     console.log(scope);
-      //   }
-      // },
-      compile: function() {
-        return {
-          pre: function(scope) {
-            console.log('pre-link');
-            console.log(scope.$ctrl.car.id);
-
-            scope.$ctrl.editCarForm = {
-              ...scope.$ctrl.car,
-            };            
-          },
-          post: function(scope) {
-            console.log('post-link');
-            console.log(scope);
-          }
-        };
-      },
     };
-
-    // compile, controller, prelink, postlink
-
 
   })
   .directive('toolHeader', function() {
