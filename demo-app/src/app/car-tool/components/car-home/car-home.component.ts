@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
+
+import { ICar } from '../../models/car';
 
 @Component({
   selector: 'app-car-home',
   templateUrl: './car-home.component.html',
   styleUrls: ['./car-home.component.css']
 })
-export class CarHomeComponent implements OnInit {
+export class CarHomeComponent {
 
   headerText = 'Car Tool';
 
@@ -15,25 +16,10 @@ export class CarHomeComponent implements OnInit {
     { id: 2, make: 'Tesla', model: 'S', year: 2019, color: 'blue', price: 100000 },
   ];
 
-  carForm: FormGroup;
-
-  constructor(private fb: FormBuilder) { }
-
-  ngOnInit() {
-
-    this.carForm = this.fb.group({
-      make: '',
-      model: '',
-      year: 1900,
-      color: '',
-      price: 0,
-    });
-  }
-
-  addCar() {
+  addCar(newCar: ICar) {
 
     this.cars = this.cars.concat({
-      ...this.carForm.value,
+      ...newCar,
       id: Math.max(...this.cars.map(c => c.id), 0) + 1,
     });
 
