@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '../shared/shared.module';
 
+ // import { ColorData } from './services/color-data';
+
 import { ColorHomeComponent } from './components/color-home/color-home.component';
 import { ColorFormComponent } from './components/color-form/color-form.component';
 
@@ -12,6 +14,7 @@ import { ColorFormComponent } from './components/color-form/color-form.component
   imports: [
     CommonModule, ReactiveFormsModule, SharedModule,
   ],
-  exports: [ ColorHomeComponent ]
+  exports: [ ColorHomeComponent ],
+  // providers: [ { provide: ColorData, useFactory: () => new ColorData() } ], // angular.service('colorData', someClass)
 })
 export class ColorToolModule { }

@@ -180,8 +180,16 @@ angular.module('CarToolApp', [])
 
         const vm = this;
 
-        vm.cars = carsSvc.all();
-  
+        function refreshCars() {
+          return carsSvc
+            .all()
+            .then(cars => {
+              vm.cars = cars;
+              vm.editCarId = -1;
+            });
+        }
+
+        refreshCars();
   
         vm.carForm = {
           make: '',
@@ -192,9 +200,10 @@ angular.module('CarToolApp', [])
         };
   
         vm.addCar = function(car) {
-          carsSvc.append(car);
-          vm.cars = carsSvc.all();
-          vm.editCarId = -1;
+          carsSvc.append(car)
+            .then(() => {
+              refreshCars();
+            });
         };
   
         vm.editCar = function(carId) {
@@ -202,15 +211,17 @@ angular.module('CarToolApp', [])
         }
   
         vm.deleteCar = function(carId) {
-          carsSvc.remove(carId);
-          vm.cars = carsSvc.all();
-          vm.editCarId = -1;
+          carsSvc.remove(carId)
+            .then(() => {
+              refreshCars();
+            });
         };
   
         vm.saveCar = function(car) {
-          carsSvc.replace(car);
-          vm.cars = carsSvc.all();
-          vm.editCarId = -1;
+          carsSvc.replace(car)
+            .then(() => {
+              refreshCars();
+            });
         };
   
         vm.cancelCar = function() {
