@@ -6,7 +6,7 @@
   "scripts": {
     "start": "run-p rest web",
     "web": "parcel public/index.html",
-    "rest": "json-server --port 3050 ./db.json"
+    "rest": "json-server --port 3060 ./db.json"
   },
   "keywords": [],
   "author": "",

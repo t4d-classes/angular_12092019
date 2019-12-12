@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-car-table',
@@ -10,9 +10,16 @@ export class CarTableComponent implements OnInit {
   @Input()
   cars = [];
 
+  @Output()
+  deleteCar = new EventEmitter<number>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  doDeleteCar(carId: number) {
+    this.deleteCar.emit(carId);
   }
 
 }

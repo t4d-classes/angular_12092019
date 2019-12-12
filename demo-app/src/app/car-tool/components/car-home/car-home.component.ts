@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { CarData } from '../../services/CarsService';
 
 import { ICar } from '../../models/car';
 
@@ -7,22 +9,30 @@ import { ICar } from '../../models/car';
   templateUrl: './car-home.component.html',
   styleUrls: ['./car-home.component.css']
 })
-export class CarHomeComponent {
+export class CarHomeComponent implements OnInit {
 
   headerText = 'Car Tool';
 
-  cars = [
-    { id: 1, make: 'Ford', model: 'Fusion Hybrid', year: 2018, color: 'white', price: 45000 },
-    { id: 2, make: 'Tesla', model: 'S', year: 2019, color: 'blue', price: 100000 },
-  ];
+  cars: ICar[] = [];
 
-  addCar(newCar: ICar) {
+  constructor(private carData: CarData) { }
 
-    this.cars = this.cars.concat({
-      ...newCar,
-      id: Math.max(...this.cars.map(c => c.id), 0) + 1,
-    });
+  ngOnInit() {
+    this.carData.all().then(cars => this.cars = cars);
+  }
 
+  doAddCar(newCar: ICar) {
+
+    this.carData.append(newCar)
+      .then(() => this.carData.all())
+      .then(cars => this.cars = cars);
+  }
+
+  doDeleteCar(carId: number) {
+    this.carData
+      .remove(carId)
+      .then(() => this.carData.all())
+      .then(cars => this.cars = cars);
   }
 
 }
