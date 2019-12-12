@@ -38,11 +38,20 @@ angular.module('ColorToolApp', [])
 
         vm.headerText = 'Color Tool';
 
-        vm.colors = colorsData.all();
+        // async/promise call
+        colorsData.all().then(colors => {
+          vm.colors = colors;
+        });
+
+        // original
+        // vm.colors = colorsData.all();
   
-        vm.addColor = function(colorData) {
-          colorsData.append(colorData.color);
-          vm.colors = colorsData.all();
+        vm.addColor = function(colorForm) {
+
+          colorsData
+            .append({ name: colorForm.color })
+            .then(() => colorsData.all())
+            .then(colors => vm.colors = colors);
         };
 
       }],

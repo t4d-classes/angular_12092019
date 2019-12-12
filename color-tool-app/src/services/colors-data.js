@@ -1,79 +1,39 @@
 require('angular');
 
-// function ColorsData() {
-
-//   this._colors = ['red', 'green', 'blue'];
-// }
-
-// ColorsData.prototype.all = function() {
-//   return this._colors.concat();
-// };
-
-// ColorsData.prototype.append = function(color) {
-//   this._colors = this._colors.concat(color);
-// }
-
-class ColorsData {
-  constructor() {
-    this._colors  = ['red', 'green', 'blue'];
-  }
-
-  all() {
-    return this._colors.concat();
-  };
-  
-  append(color) {
-    this._colors = this._colors.concat(color);
-  }
-}
-
 angular.module('ColorToolApp')
-  .value('colorsData', new ColorsData());
-  // .service('colorsData', ColorsData)
-  // .factory('colorsData', function() {
+  .factory('colorsData', function($http) {
 
-  //   var colors = ['red', 'green', 'blue'];
+    return {
+      all() {
 
-  //   return {
-  //     all() {
-  //       return colors.concat();
-  //     },
-  //     append(color) {
-  //       colors = colors.concat(color);
-  //     },
-  //     remove(color) {
-  //       colors = colors.filter(c => c !== color);
-  //     },
-  //   };
+        return $http.get('http://localhost:3050/colors')
+          .then(function(res) {
+            return res.data; // output: array of colors
+          });
 
-  // })
-  // .provider('colorsData', function() {
+      },
+      append(color) {
 
-  //   // provider
-  //   return {
+        return $http.post(
+          'http://localhost:3050/colors',
+          color, // { color: 'purple' }
+        )
+          .then(function(res) {
+            return res.data; // output: { id: 4, name: purple}
+          });        
 
-  //     // $get function is the factory function
-  //     $get: function() {
+      },
+    }
 
-  //       // service based approach
-  //       return new ColorsData();
-
-  //       // var colors = ['red', 'green', 'blue'];
-
-  //       // return {
-  //       //   all() {
-  //       //     return colors.concat();
-  //       //   },
-  //       //   append(color) {
-  //       //     colors = colors.concat(color);
-  //       //   },
-  //       //   remove(color) {
-  //       //     colors = colors.filter(c => c !== color);
-  //       //   },
-  //       // };
-    
-  //     },
-  //   };
+  });
 
 
-  // });  
+  // function doIt(fn) {
+  //   fn('test');
+  // }
+
+  // function thisIsFun(msg) {
+  //   console.log(msg);
+  // }
+
+  // doIt(thisIsFun);
