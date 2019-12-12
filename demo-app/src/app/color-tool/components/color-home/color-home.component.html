@@ -21,10 +21,10 @@
 <ul>
   <ng-container *ngFor="let color of colors">
     <li> <!-- ng-repeat-start -->
-      {{color}}
+      {{color.name}}
     </li>
     <li> <!-- ng-repeat-end -->
-      {{color.toUpperCase()}}
+      {{color.name.toUpperCase()}}
     </li>
   </ng-container>
   <!-- <ng-template ngFor [ngForOf]="colors" let-color>

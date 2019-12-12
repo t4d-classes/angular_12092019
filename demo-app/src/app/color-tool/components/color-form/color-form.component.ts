@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
+import { IColor } from '../../models/color';
+
 @Component({
   selector: 'app-color-form',
   templateUrl: './color-form.component.html',
@@ -12,7 +14,7 @@ export class ColorFormComponent implements OnInit {
   buttonText = 'Submit Color';
 
   @Output()
-  submitColorForm = new EventEmitter<string>();
+  submitColorForm = new EventEmitter<IColor>();
 
   colorForm: FormGroup;
 
@@ -25,7 +27,7 @@ export class ColorFormComponent implements OnInit {
   }
 
   submitColor() {
-    this.submitColorForm.emit(this.colorForm.value.color);
+    this.submitColorForm.emit({ name: this.colorForm.value.color });
     this.colorForm.reset();
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ColorData } from '../../services/color-data';
+import { IColor } from '../../models/color';
 
 @Component({
   selector: 'app-color-home',
@@ -11,7 +12,7 @@ export class ColorHomeComponent implements OnInit {
 
   colorToolHeaderText = 'Color Tool!!!';
 
-  colors: string[] = [];
+  colors: IColor[] = [];
 
   // private colorData: ColorData;
 
@@ -22,11 +23,15 @@ export class ColorHomeComponent implements OnInit {
   constructor(private colorData: ColorData) { }
 
   ngOnInit() {
-    this.colors = this.colorData.all();
+    this.colorData
+      .all()
+      .subscribe(colors => this.colors = colors);
   }
 
-  addColor(newColor: string) {
-    this.colors = this.colors
-      .concat(newColor);
+  addColor(newColor: IColor) {
+    this.colorData
+      .append(newColor)
+      .then(() => this.colorData.all().toPromise())
+      .then(colors => this.colors = colors);
   }
 }
