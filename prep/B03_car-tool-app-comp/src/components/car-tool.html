@@ -1,0 +1,13 @@
+<tool-header
+  header-text="Car Tool">
+</tool-header>
+
+<car-table
+  cars="$ctrl.cars" edit-car-id="$ctrl.editCarId"
+  on-edit-car="$ctrl.editCar(carId)" on-delete-car="$ctrl.deleteCar(carId)"
+  on-save-car="$ctrl.saveCar(car)" on-cancel-car="$ctrl.cancelCar()">
+</car-table>
+
+<car-form
+  button-text="Add Car" on-submit-car="$ctrl.addCar(car)">
+</car-form>

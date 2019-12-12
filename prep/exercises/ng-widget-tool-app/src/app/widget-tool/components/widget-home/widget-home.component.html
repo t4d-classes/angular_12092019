@@ -1,0 +1,9 @@
+<tool-header headerText="Widget Tool"></tool-header>
+
+<widget-table [widgets]="widgets" [editWidgetId]="editWidgetId"
+  (editWidget)="doEditWidget($event)"
+  (deleteWidget)="doDeleteWidget($event)"
+  (saveWidget)="doReplaceWidget($event)"
+  (cancelWidget)="doCancelWidget()"></widget-table>
+
+<widget-form buttonText="Add Widget" (submitWidget)="doAppendWidget($event)"></widget-form>

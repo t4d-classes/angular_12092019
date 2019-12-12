@@ -1,0 +1,6 @@
+<ul>
+  <li ng-repeat="item in $ctrl.items | orderBy:'name' track by $index">
+    {{item.name}}
+    <button type="button" ng-click="$ctrl.onDeleteItem({ itemId: item.id })">X</button>
+  </li>
+</ul>

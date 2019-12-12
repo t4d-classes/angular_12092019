@@ -1,0 +1,26 @@
+<form novalidate>
+
+  <div>
+    <label for="make-input">Make:</label>
+    <input type="text" id="make-input" name="make" ng-model="$ctrl.carForm.make" />
+  </div>
+  <div>
+    <label for="model-input">Model:</label>
+    <input type="text" id="model-input" name="model" ng-model="$ctrl.carForm.model" />
+  </div>
+  <div>
+    <label for="year-input">Year:</label>
+    <input type="number" id="year-input" name="year" ng-model="$ctrl.carForm.year" />
+  </div>
+  <div>
+    <label for="color-input">Color:</label>
+    <input type="text" id="color-input" name="color" ng-model="$ctrl.carForm.color" />
+  </div>
+  <div>
+    <label for="price-input">Price:</label>
+    <input type="number" id="price-input" name="price" ng-model="$ctrl.carForm.price" />
+  </div>
+              
+  <button type="button" ng-click="$ctrl.submitCar()">{{$ctrl.buttonText}}</button>
+
+</form>

@@ -1,0 +1,6 @@
+<ul>
+  <li ng-repeat="item in vm.items track by $index">
+    {{item}}
+    <button type="button" ng-click="vm.onDeleteItem({ item })">X</button>
+  </li>
+</ul>

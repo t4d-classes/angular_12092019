@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>Car Tool App</title>
+  </head>
+
+  <body>
+
+    <div ng-app="CarToolApp" ng-controller="CarToolController">
+
+      <header>
+        <h1>{{headerText}}</h1>
+      </header>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Color</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat-start="car in cars" ng-if="car.id === editCarId">
+            <td>{{car.id}}</td>
+            <td><input type="text" id="edit-make-input" name="make" ng-model="editCarForm.make"></td>
+            <td><input type="text" id="edit-model-input" name="model" ng-model="editCarForm.model"></td>
+            <td><input type="number" id="edit-year-input" name="year" ng-model="editCarForm.year"></td>
+            <td><input type="text" id="edit-color-input" name="color" ng-model="editCarForm.color"></td>
+            <td><input type="number" id="edit-price-input" name="price" ng-model="editCarForm.price"></td>
+            <td>
+              <button type="button" ng-click="saveCar(car.id)">Save</button>
+              <button type="button" ng-click="cancelCar()">Cancel</button>
+            </td>
+          </tr>
+          <tr ng-repeat-end ng-if="car.id !== editCarId">
+              <td>{{car.id}}</td>
+              <td>{{car.make}}</td>
+              <td>{{car.model}}</td>
+              <td>{{car.year}}</td>
+              <td>{{car.color}}</td>
+              <td>{{car.price}}</td>
+              <td>
+                <button type="button" ng-click="editCar(car.id)">Edit</button>
+                <button type="button" ng-click="deleteCar(car.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+      </table>
+
+      <form>
+        <div>
+          <label for="make-input">Make:</label>
+          <input type="text" id="make-input" name="make" ng-model="carForm.make">
+        </div>
+        <div>
+          <label for="model-input">Model:</label>
+          <input type="text" id="model-input" name="model" ng-model="carForm.model">
+        </div>
+        <div>
+          <label for="year-input">Year:</label>
+          <input type="number" id="year-input" name="year" ng-model="carForm.year">
+        </div>
+        <div>
+          <label for="color-input">Color:</label>
+          <input type="text" id="color-input" name="color" ng-model="carForm.color">
+        </div>
+        <div>
+          <label for="price-input">Price:</label>
+          <input type="number" id="price-input" name="price" ng-model="carForm.price">
+        </div>
+        <button type="button" ng-click="addCar()">Add Car</button>
+      </form>
+      
+    </div>
+
+    <script src="../src/index.js"></script>
+
+  </body>
+
+
+</html>

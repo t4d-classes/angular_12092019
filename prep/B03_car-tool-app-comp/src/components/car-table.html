@@ -1,0 +1,29 @@
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Make</th>
+      <th>Model</th>
+      <th>Year</th>
+      <th>Color</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class='car-view-row'
+      ng-repeat-start="car in $ctrl.cars"
+      ng-if="car.id !== $ctrl.editCarId"
+      car="car"
+      on-edit-car="$ctrl.editCar(carId)"
+      on-delete-car="$ctrl.deleteCar(carId)">
+    </tr>
+    <tr class='car-edit-row'
+      ng-repeat-end
+      ng-if="car.id === $ctrl.editCarId"
+      car="car"
+      on-save-car="$ctrl.saveCar(car)"
+      on-cancel-car="$ctrl.cancelCar()">
+  </tr>
+  </tbody>
+</table>
