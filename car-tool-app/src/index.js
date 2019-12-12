@@ -59,10 +59,10 @@ angular.module('CarToolApp', [])
         };
 
         $ctrl.saveCar = function SaveCar() {
-          $ctrl.onSaveCar({
+          $ctrl.onSaveCar({ car: {
             ...$ctrl.editCarForm,
             id: $ctrl.car.id,
-          });
+          } });
         };
 
         $ctrl.cancelCar = function CancelCar(carId) {
@@ -176,14 +176,11 @@ angular.module('CarToolApp', [])
       scope: { },
       bindToController: true,
       controllerAs: 'vm',
-      controller: function() {
+      controller: ['carsSvc', function(carsSvc) {
 
         const vm = this;
 
-        vm.cars = [
-          { id: 1, make: 'Ford', model: 'Fusion Hybrid', year: 2018, color: 'white', price: 45000 },
-          { id: 2, make: 'Tesla', model: 'S', year: 2019, color: 'blue', price: 100000 },
-        ];
+        vm.cars = carsSvc.all();
   
   
         vm.carForm = {
@@ -195,12 +192,9 @@ angular.module('CarToolApp', [])
         };
   
         vm.addCar = function(car) {
-  
-          vm.cars = vm.cars.concat({
-            ...car,
-            id: Math.max(...vm.cars.map(c => c.id), 0) + 1,
-          });
-  
+          carsSvc.append(car);
+          vm.cars = carsSvc.all();
+          vm.editCarId = -1;
         };
   
         vm.editCar = function(carId) {
@@ -208,16 +202,14 @@ angular.module('CarToolApp', [])
         }
   
         vm.deleteCar = function(carId) {
-          vm.cars = vm.cars.filter(c => c.id !== carId);
+          carsSvc.remove(carId);
+          vm.cars = carsSvc.all();
+          vm.editCarId = -1;
         };
   
         vm.saveCar = function(car) {
-  
-          const carIndex = vm.cars
-            .findIndex(c => c.id === car.id);
-  
-          vm.cars = vm.cars.concat();
-          vm.cars[carIndex] = car;
+          carsSvc.replace(car);
+          vm.cars = carsSvc.all();
           vm.editCarId = -1;
         };
   
@@ -225,8 +217,9 @@ angular.module('CarToolApp', [])
           vm.editCarId = -1;
         };        
 
-      },
+      }],
     };
 
   });
 
+require('./services/cars-svc');
